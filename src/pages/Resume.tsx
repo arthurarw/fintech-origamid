@@ -1,7 +1,13 @@
+import ChartSales from "../components/ChartSales";
+import Loading from "../components/Loading";
 import { useData } from "../contexts/DataContext";
 
 const Resume = () => {
-  const { data } = useData();
+  const { data, loading } = useData();
+
+  if (loading) {
+    return <Loading />;
+  }
 
   if (data === null) {
     return null;
@@ -46,7 +52,9 @@ const Resume = () => {
           </span>
         </div>
       </div>
-      <div className="box mb">Gráficos</div>
+      <div className="box mb">
+        <ChartSales sales={data} />
+      </div>
     </section>
   );
 };
